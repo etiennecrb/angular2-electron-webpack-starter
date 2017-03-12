@@ -1,0 +1,51 @@
+{
+  "name": "angular2-electron-webpack-starter",
+  "version": "1.0.0",
+  "description": "A simple starter to build an Electron app with Angular",
+  "main": "./electron/main.ts",
+  "dependencies": {
+    "@angular/common": "~2.4.0",
+    "@angular/compiler": "~2.4.0",
+    "@angular/core": "~2.4.0",
+    "@angular/forms": "~2.4.0",
+    "@angular/http": "~2.4.0",
+    "@angular/platform-browser": "~2.4.0",
+    "@angular/platform-browser-dynamic": "~2.4.0",
+    "@angular/router": "~3.4.0",
+    "core-js": "^2.4.1",
+    "ngx-electron": "0.0.10",
+    "reflect-metadata": "^0.1.10",
+    "rxjs": "5.0.1",
+    "zone.js": "^0.7.4"
+  },
+  "devDependencies": {
+    "@types/electron": "^1.4.33",
+    "@types/node": "^6.0.45",
+    "angular2-template-loader": "^0.6.0",
+    "awesome-typescript-loader": "^3.0.4",
+    "css-loader": "^0.26.1",
+    "electron": "^1.6.1",
+    "electron-packager": "^8.5.2",
+    "extract-text-webpack-plugin": "2.0.0-beta.5",
+    "file-loader": "^0.9.0",
+    "html-loader": "^0.4.3",
+    "html-webpack-inline-source-plugin": "0.0.6",
+    "html-webpack-plugin": "^2.16.1",
+    "raw-loader": "^0.5.1",
+    "style-loader": "^0.13.1",
+    "typescript": "~2.0.10",
+    "webpack": "2.2.1",
+    "webpack-dev-server": "2.4.1",
+    "webpack-merge": "^3.0.0"
+  },
+  "scripts": {
+    "app-build:dev": "webpack --config config/webpack.dev.js --progress --profile --watch",
+    "app-build:prod": "webpack --config config/webpack.prod.js --progress --profile --bail",
+    "clean": "rm -r dist/*",
+    "electron-build": "./node_modules/typescript/bin/tsc -p tsconfig.electron.json && electron ./dist/main.js",
+    "start": "npm run clean && npm run app-build:dev | npm run electron-build",
+    "build": "npm runclean && npm run app-build:prod"
+  },
+  "author": "Étienne Corbillé",
+  "license": "ISC"
+}
