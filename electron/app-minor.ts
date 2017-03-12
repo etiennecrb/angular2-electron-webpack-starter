@@ -8,7 +8,7 @@ ipcMain.on('openAppMinor', () => {
 
   // and load the index.html of the app.
   minorWin.loadURL(url.format({
-    pathname: path.join(__dirname, '../app-minor.html'),
+    pathname: path.join(__dirname, 'app-minor.html'),
     protocol: 'file:',
     slashes: true
   }));

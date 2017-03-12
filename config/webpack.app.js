@@ -1,13 +1,20 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const helpers = require('./helpers');
 
 module.exports = {
+  devtool: 'source-map',
+
   entry: {
     'app-minor': './app-minor/index.ts',
     'app-main': './app-main/main.ts'
+  },
+
+  output: {
+    path: helpers.root('dist'),
+    publicPath: './',
+    filename: '[name].js'
   },
 
   resolve: {
@@ -21,7 +28,7 @@ module.exports = {
         loaders: [
           {
             loader: 'awesome-typescript-loader',
-            options: { configFileName: helpers.root('tsconfig.app.json') }
+            options: { configFileName: helpers.root('tsconfig.json') }
           } , 'angular2-template-loader'
         ]
       },
@@ -47,6 +54,8 @@ module.exports = {
   },
 
   plugins: [
+    new ExtractTextPlugin('[name].css'),
+    
     // Workaround for angular/angular#11580
     new webpack.ContextReplacementPlugin(
       // The (\\|\/) piece accounts for path separators in *nix and Windows
@@ -58,17 +67,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'app-minor.html',
       chunks: ['app-minor'],
-      template: './app-minor/index.html',
-      inlineSource: '.(js|css)$'
+      template: './app-minor/index.html'
     }),
 
     new HtmlWebpackPlugin({
       filename: 'app-main.html',
       chunks: ['app-main'],
-      template: './app-main/index.html',
-      inlineSource: '.(js|css)$'
-    }),
-
-    new HtmlWebpackInlineSourcePlugin()
+      template: './app-main/index.html'
+    })
   ]
 };

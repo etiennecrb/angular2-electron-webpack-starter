@@ -2,7 +2,7 @@
   "name": "angular2-electron-webpack-starter",
   "version": "1.0.0",
   "description": "A simple starter to build an Electron app with Angular",
-  "main": "./electron/main.ts",
+  "main": "./main.js",
   "dependencies": {
     "@angular/common": "~2.4.0",
     "@angular/compiler": "~2.4.0",
@@ -39,12 +39,15 @@
     "webpack-merge": "^3.0.0"
   },
   "scripts": {
-    "app-build:dev": "webpack --config config/webpack.dev.js --progress --profile --watch",
-    "app-build:prod": "webpack --config config/webpack.prod.js --progress --profile --bail",
-    "clean": "rm -r dist/*",
-    "electron-build": "./node_modules/typescript/bin/tsc -p tsconfig.electron.json && electron ./dist/main.js",
-    "start": "npm run clean && npm run app-build:dev | npm run electron-build",
-    "build": "npm runclean && npm run app-build:prod"
+    "app-build": "webpack --config config/webpack.app.js --progress --profile",
+    "app-watch": "webpack --config config/webpack.app.js --watch",
+    "clean": "rm -rf dist/* && rm -rf build/",
+    "electron-build": "webpack --config config/webpack.electron.js",
+    "electron-run": "electron ./dist/main.js",
+    "prepackage": "rm -f dist/*.map && cp package.json dist/",
+    "package": "electron-packager dist --out build/",
+    "start": "npm run clean && npm run app-build && npm run electron-build && npm run electron-run | npm run app-watch",
+    "build": "npm run clean && npm run app-build && npm run electron-build && npm run package"
   },
   "author": "Étienne Corbillé",
   "license": "ISC"
