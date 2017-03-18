@@ -4,7 +4,7 @@ const helpers = require('./helpers');
 module.exports = {
   devtool: 'source-map',
 
-  target: 'electron',
+  target: 'electron-main',
 
   entry: {
     'main': './main.ts'

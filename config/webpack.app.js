@@ -6,6 +6,8 @@ const helpers = require('./helpers');
 module.exports = {
   devtool: 'source-map',
 
+  target: 'electron-renderer', 
+
   entry: {
     'app-minor': './app-minor/index.ts',
     'app-main': './app-main/main.ts'
