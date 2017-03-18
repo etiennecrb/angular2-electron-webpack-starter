@@ -9,7 +9,17 @@ Many Electron/Angular starters have a lots of features. Some of them are useless
 - Typescript everywhere (even in main process)
 - Shared code between main and renderer processes
 - Multiple windows (see `app-main` and `app-minor`)
+- Package your app with [`electron-packager`](https://github.com/electron-userland/electron-packager)
 - Angular wrapper for Electron's API with [`ngx-electron`](https://github.com/ThorstenHans/ngx-electron/)
 
+## Scripts
+Start dev environment with:
+```
+npm run start
+```
+Package your app:
+```
+npm run build
+```
 ## Use cases
 An Electron app is not always a web app wrapped up for desktop. For [this other project](https://github.com/etiennecrb/poker-hud), I need Node.js API to access file system and run asynchronous computation. I also needed to share some models between my Angular app and the main process and I have multiple windows (renderer processes) that communicate with Electron. If you share some of these, this starter can give you some ideas.
